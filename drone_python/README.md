@@ -20,3 +20,6 @@ asks the MQTT client to established a connection to the specified MQTT server.
 * The equivalent `connect` method runs with a synchoronous exection.
 
 5. After a connection has been successfully established with the MQTT server, the specified callback in the `client.on_connect` attribute will be executed, that is, the `onConnect` function. This function recives the `mqtt.Client` instance that established the connection with the MQTT server in the `client` argument.
+6. The main block calls the `client.loop_forever` method that calls the loop method for us in an infinite blocking loop. We will receive the messages whose topic matches the topic to which we have subscribed.
+
+### Test result
