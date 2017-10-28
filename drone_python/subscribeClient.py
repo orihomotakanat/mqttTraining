@@ -13,7 +13,7 @@ mqttKeepAlive = 60
 print(clientCert)
 
 # Functions
-def onConnect(client, userdata, rc):
+def onConnect(client, userdata, flage, rc):
     print("Connection status: {}".format(mqtt.connack_string(rc)))
     client.subscribe("test/drone01")
 
