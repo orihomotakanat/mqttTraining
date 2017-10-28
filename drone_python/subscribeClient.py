@@ -2,13 +2,15 @@ import paho.mqtt.client as mqtt
 import os.path
 
 # client setting
-deviceCertificatePath = "/ubuntu/certs"
+deviceCertificatePath = "/home/ubuntu/certs/"
 ca = os.path.join(deviceCertificatePath, "ca.crt")
 clientCert =  os.path.join(deviceCertificatePath, "device001.crt")
 clientKey = os.path.join(deviceCertificatePath, "device001.key")
 mqttServerHost = "127.0.0.1"
 mqttPort = 8883
 mqttKeepAlive = 60
+
+print(clientCert)
 
 # Functions
 def onConnect(client, userdata, rc):
@@ -35,5 +37,5 @@ if __name__ == "__main__":
         keyfile=clientKey)
     client.connect_async(host=mqttServerHost,
         port=mqttPort,
-        keepAlive=mqttKeepAlive)
+        keepalive=mqttKeepAlive)
     client.loop_forever()
