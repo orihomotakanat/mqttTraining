@@ -2,10 +2,10 @@ import paho.mqtt.client as mqtt
 import os.path
 
 # client setting
-deviceCertificatePath = "/ubuntu/device001"
+deviceCertificatePath = "/ubuntu/certs"
 ca = os.path.join(deviceCertificatePath, "ca.crt")
 clientCert =  os.path.join(deviceCertificatePath, "device001.crt")
-clientKey = os.path.join()
+clientKey = os.path.join(deviceCertificatePath, "device001.key")
 mqttServerHost = "127.0.0.1"
 mqttPort = 8883
 mqttKeepAlive = 60
