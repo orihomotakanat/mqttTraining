@@ -10,10 +10,9 @@ mqttServerHost = "127.0.0.1"
 mqttPort = 8883
 mqttKeepAlive = 60
 
-print(clientCert)
 
 # Functions
-def onConnect(client, userdata, flage, rc):
+def onConnect(client, userdata, flags, rc):
     print("Connection status: {}".format(mqtt.connack_string(rc)))
     client.subscribe("test/drone01")
 
