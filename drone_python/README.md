@@ -23,3 +23,29 @@ asks the MQTT client to established a connection to the specified MQTT server.
 6. The main block calls the `client.loop_forever` method that calls the loop method for us in an infinite blocking loop. We will receive the messages whose topic matches the topic to which we have subscribed.
 
 ### Test result
+1. (python client side) Start subscription
+```
+~/mqttTraining/drone_python$ python subscribeClient.py
+Log: Sending CONNECT (u0, p0, wr0, wq0, wf0, c1, k60) client_id=
+Log: Received CONNACK (0, 0)
+Connection status: Connection Accepted.
+Log: Sending SUBSCRIBE (d0) [('test/drone01', 0)]
+Log: Received SUBACK
+Subscribed with QoS: 0
+```
+
+2. (Another client side) Publish message
+```
+~/certs$ mosquitto_pub -V mqttv311 -p 8883 --cafile /etc/mosquitto/ca_certificates/ca.crt -t test/drone01 -d -h 127.0.0.1 --cert device001.crt --key device001.key -m '{"COMMAND" : "LAND"}' -q 1
+Client mosqpub|1910-ip-172-31- sending CONNECT
+Client mosqpub|1910-ip-172-31- received CONNACK
+Client mosqpub|1910-ip-172-31- sending PUBLISH (d0, q1, r0, m1, 'test/drone01', ... (20 bytes))
+Client mosqpub|1910-ip-172-31- received PUBACK (Mid: 1)
+Client mosqpub|1910-ip-172-31- sending DISCONNECT
+```
+
+3. (python client side) Subscribe message
+```
+Log: Received PUBLISH (d0, q0, r0, m0), 'test/drone01', ...  (20 bytes)
+Topic: test/drone01. Payload: {"COMMAND" : "LAND"}
+```
