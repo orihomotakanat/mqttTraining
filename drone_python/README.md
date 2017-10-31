@@ -68,7 +68,7 @@ The `__init__` method saves the received `name` in an attribute with the same na
 * `__init__` method
 This method saves receive `name` and `drone` in attributes with the same names. Then, this method sets the values for the `commands_topic` and `processed_commands_topic` class attribute by `DroneCommandProcessor.commands_topic` and `roneCommandProcessor.processed_commands_topic`. The MQTT client will receive messages in the topic name saved in the `commands_topic` class attribute and will publish messages to the topic name saved in the `processed_commands_topic` class attribute.
 
-The code also saves a reference to `mqtt.client` instance in the `active_instance` class attribute because we have to access the instance in the static methods that this `__init__` method will specify as callbacks for the different events that the MQTT client fires. We want to have all the methods related to the drone command processor in `DroneCommandProcessor` class.
+  The code also saves a reference to `mqtt.client` instance in the `active_instance` class attribute because we have to access the instance in the static methods that this `__init__` method will specify as callbacks for the different events that the MQTT client fires. We want to have all the methods related to the drone command processor in `DroneCommandProcessor` class.
 
 * `onConnect`
 After a connection has been successfully established with the MQTT server, the specified callback in the `self.client.on_connect` attribute (`onConnect` static method) will be executed. This static method receives the **`mqtt.Client` instance** (already established the connection with the MQTT server). Finally, after subscribing and publishing, the message starts with the drone name.
