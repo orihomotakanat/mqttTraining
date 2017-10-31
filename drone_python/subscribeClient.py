@@ -31,7 +31,7 @@ def onLog(client, userdata, level, buf):
 # Main
 if __name__ == "__main__":
     client = mqtt.Client(protocol=mqtt.MQTTv311)
-    client.on_log = onLog 
+    client.on_log = onLog
     client.on_connect = onConnect
     client.on_subscribe = onSubscribe
     client.on_message = onMessage

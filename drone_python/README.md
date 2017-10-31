@@ -49,3 +49,28 @@ Client mosqpub|1910-ip-172-31- sending DISCONNECT
 Log: Received PUBLISH (d0, q0, r0, m0), 'test/drone01', ...  (20 bytes)
 Topic: test/drone01. Payload: {"COMMAND" : "LAND"}
 ```
+
+## `drone.py`
+### About `command.py`
+This contents declare many variables with the values that identity each of the supported commnads for the drone. Additionally, the code declares specification of successfully proccessed command (Key strings). All these variables are defined with all letters uppercase beacuse we will use them as constants.
+
+### About two classes
+1. `Drone` : A class to represent a drone
+This class will represent a drone and provides methods that will be called whenever a command has to be processed.
+
+2. `DroneCommandProcessor` : Receiving messages
+This class will represent a command processor that will establish a connection with an MQTT server, subscribe to a topic in which tha MQTT client will receive messages with commands, analyze the incomming messages, and delegate the exection of the commands to an associated instance of the `Drone` class. This class will declare many static methods that we will specify as the callbacks for the MQTT client.
+
+#### 1. `Drone` class
+The `__init__` method saves the received `name` in an attribute with the same name. Then, this method sets the initial values for `min_altitude` and `max_altitude`
+
+#### 2. `DroneCommandProcessor` class
+* `__init__` method
+This method saves receive `name` and `drone` in attributes with the same names. Then, this method sets the values for the `commands_topic` and `processed_commands_topic` class attribute by `DroneCommandProcessor.commands_topic` and `roneCommandProcessor.processed_commands_topic`. The MQTT client will receive messages in the topic name saved in the `commands_topic` class attribute and will publish messages to the topic name saved in the `processed_commands_topic` class attribute.
+
+The code also saves a reference to `mqtt.client` instance in the `active_instance` class attribute because we have to access the instance in the static methods that this `__init__` method will specify as callbacks for the different events that the MQTT client fires. We want to have all the methods related to the drone command processor in `DroneCommandProcessor` class.
+
+* `onConnect`
+After a connection has been successfully established with the MQTT server, the specified callback in the `self.client.on_connect` attribute (`onConnect` static method) will be executed. This static method receives the **`mqtt.Client` instance** (already established the connection with the MQTT server). Finally, after subscribing and publishing, the message starts with the drone name.
+
+* `onMessage`
