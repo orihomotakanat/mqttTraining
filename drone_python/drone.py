@@ -92,7 +92,7 @@ class DroneCommandProcessor:
     def onConnect(client, userdata, flags, rc):
         print("Connected to the MQTT server")
         client.subscribe(DroneCommandProcessor.commands_topic, qos=2)
-        client.publish(topic=DroneCommandProcessor.commands_topic, payload="{} is listening to messages".format(DroneCommandProcessor.active_instance.name)
+        client.publish(topic=DroneCommandProcessor.commands_topic, payload="{} is listening to messages".format(DroneCommandProcessor.active_instance.name))
 
     @staticmethod
     def onMessage(client, userdata, msg):
