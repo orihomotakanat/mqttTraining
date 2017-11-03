@@ -65,6 +65,10 @@ class Drone:
         self.min_altitude = feet
         self.print_with_name_prefix("Setting minimum altitude to {} feet".format(feet))
 
+    # Debug
+    def onLog(client, userdata, level, buf):
+        print("LOG: {}".format(buf))
+
 # DroneCommandProcessor class
 class DroneCommandProcessor:
     commands_topic = ""
@@ -170,10 +174,6 @@ class DroneCommandProcessor:
         # Any pending messages to be published in the outgoing bo will be sent and any incoming mesages will arrive to the inbox
         # and events that we have previously analyzes will be fired.
         # See README.md.
-
-    # Debug
-    def onLog(client, userdata, level, buf):
-        print("LOG: {}".format(buf))
 
 if __name__ == "__main__":
     drone = Drone("drone01")
