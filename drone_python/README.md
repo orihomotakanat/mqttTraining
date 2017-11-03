@@ -91,9 +91,16 @@ This method receives the message dictionary that has been received with the comm
 This method calls the `loop` method for the MQTT client and ensure that communication with MQTT server is carried out. The drone commnad processor will receive messages and process commands.  
 Details: http://www.steves-internet-guide.com/loop-python-mqtt-client/
 
-* `__main__` method
+
+### About the `__main__` block
 This method creates an instance of the `Drone` class named `drone` with "`drone01`" as the value for the `name` argument. The next line creates an instance of the `DroneCommandProcessor` class named `droneCommandProcessor` with "`drone01`" and the previously created `Drone` instance, `drone` as the values for the `name` and  `drone` arguments. This way, `droneCommandProcessor` will delegate the execution of the commands to the instance methods in `drone`.
 
   The instance `droneCommandProcessor` will subscribe to the `commands/drone01` topic in the MQTT server, and therefore, we must publish messages to this topic in order to send the commands that the code will process. Additionally, this instance will publish a message to the `processedcommands/drone01` topic. Whenever a command is successfully processed, new messages will be published to the `processedcommands/drone01` topic.
 
   The `while` loop calls the `droneCommandProcessor.processedcommands()` method and sleeps for one second. The `processedcommands` method calls the `loop` method for the MQTT client to ensure that communication with the MQTT server is carried out.
+
+### Test
+```
+self.on_log(self, self._userdata, level, buf)
+TypeError: unbound method onLog() must be called with DroneCommandProcessor instance as first argument (got Client instance instead)
+```

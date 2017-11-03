@@ -65,10 +65,6 @@ class Drone:
         self.min_altitude = feet
         self.print_with_name_prefix("Setting minimum altitude to {} feet".format(feet))
 
-    # Debug
-    def onLog(client, userdata, level, buf):
-        print("LOG: {}".format(buf))
-
 # DroneCommandProcessor class
 class DroneCommandProcessor:
     commands_topic = ""
@@ -82,7 +78,7 @@ class DroneCommandProcessor:
         DroneCommandProcessor.processed_commands_topic = "processedcommands/{}".format(self.name)
         self.client = mqtt.Client(protocol=mqtt.MQTTv311)
         DroneCommandProcessor.active_instance = self
-        self.client.on_log = DroneCommandProcessor.onLog
+        DroneCommandProcessor.on_log = on_log
         self.client.on_connect = DroneCommandProcessor.onConnect
         self.client.on_message = DroneCommandProcessor.onMessage
         self.client.tls_set(ca_certs=ca,
@@ -174,6 +170,10 @@ class DroneCommandProcessor:
         # Any pending messages to be published in the outgoing bo will be sent and any incoming mesages will arrive to the inbox
         # and events that we have previously analyzes will be fired.
         # See README.md.
+
+    # Debug
+    def onLog(client, userdata, level, buf):
+        print("LOG: {}".format(buf))
 
 if __name__ == "__main__":
     drone = Drone("drone01")
