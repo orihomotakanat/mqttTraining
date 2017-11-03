@@ -78,7 +78,7 @@ class DroneCommandProcessor:
         DroneCommandProcessor.processed_commands_topic = "processedcommands/{}".format(self.name)
         self.client = mqtt.Client(protocol=mqtt.MQTTv311)
         DroneCommandProcessor.active_instance = self
-        DroneCommandProcessor.on_log = on_log
+        self.client.on_log = onLog
         self.client.on_connect = DroneCommandProcessor.onConnect
         self.client.on_message = DroneCommandProcessor.onMessage
         self.client.tls_set(ca_certs=ca,
@@ -172,6 +172,7 @@ class DroneCommandProcessor:
         # See README.md.
 
     # Debug
+    @staticmethod
     def onLog(client, userdata, level, buf):
         print("LOG: {}".format(buf))
 
