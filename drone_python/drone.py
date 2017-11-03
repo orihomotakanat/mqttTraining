@@ -78,7 +78,7 @@ class DroneCommandProcessor:
         DroneCommandProcessor.processed_commands_topic = "processedcommands/{}".format(self.name)
         self.client = mqtt.Client(protocol=mqtt.MQTTv311)
         DroneCommandProcessor.active_instance = self
-        self.client.on_log = onLog
+        self.client.on_log = DroneCommandProcessor.onLog
         self.client.on_connect = DroneCommandProcessor.onConnect
         self.client.on_message = DroneCommandProcessor.onMessage
         self.client.tls_set(ca_certs=ca,
