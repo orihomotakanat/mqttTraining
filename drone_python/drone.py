@@ -100,7 +100,7 @@ class DroneCommandProcessor:
             payloadString = msg.payload.decode('utf-8')
             print("I've received the following msg: {0}".format(payloadString))
         try:
-            msgDictionary = json.load(payloadString)
+            msgDictionary = json.loads(payloadString)
             if COMMAND_KEY in msgDictionary:
                 command = msgDictionary[COMMAND_KEY]
                 drone = DroneCommandProcessor.active_instance.drone
