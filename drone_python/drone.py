@@ -88,13 +88,13 @@ class DroneCommandProcessor:
             port=mqttPort,
             keepalive=mqttKeepAlive)
 
-    staticmethod:
+    @staticmethod
     def onConnect(client, userdata, flags, rc):
         print("Connected to the MQTT server")
         client.subscribe(DroneCommandProcessor.commands_topic, qos=2)
         client.publish(topic=DroneCommandProcessor.commands_topic, payload="{} is listening to messages".format(DroneCommandProcessor.active_instance.name)
 
-    staticmethod:
+    @staticmethod
     def onMessage(client, userdata, msg):
         payloadString = msg.payload.decode('utf-8')
         if msg.topic == DroneCommandProcessor.commands_topic:
