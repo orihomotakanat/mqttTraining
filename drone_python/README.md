@@ -83,3 +83,13 @@ This static method receives the `mqtt.Client` instance that established the conn
   The code uses the `active_instance` class attribute that has a reference to the active `DroneCommandProcessor` instance to call the necessary methods for either `drone`
   - After the code; `is_command_processed`:  
   Once the command has been successfully processed, the code sets the `is_command_processed` flag to `True`. Finally, the code checks the value of this falg, and if it is equal to `True`, the code cals the `publishResponseMessage` for the `DroneCommandProcessor` instance saved in the `active_instance` class attribute.
+
+* `publishResponseMessage`
+This method receives the message dictionary that has been received with the command in the `message` argument. The method calls the `json.dumps` funtion to serialize a dictionary to a JSON formatted string with the response message that indicates that the command has been successfully processed.
+
+* `processedcommands`
+This method calls the `loop` method for the MQTT client and ensure that communication with MQTT server is carried out. The drone commnad processor will receive messages and process commands.  
+Details: http://www.steves-internet-guide.com/loop-python-mqtt-client/
+
+* `__main__` method
+This method creates an instance of the `Drone` class named `drone` with "`drone01`" as the value for the `name` argument.

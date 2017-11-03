@@ -78,6 +78,7 @@ class DroneCommandProcessor:
         DroneCommandProcessor.processed_commands_topic = "processedcommands/{}".format(self.name)
         self.client = mqtt.Client(protocol=mqtt.MQTTv311)
         DroneCommandProcessor.active_instance = self
+        self.client.on_log = DroneCommandProcessor.onLog
         self.client.on_connect = DroneCommandProcessor.onConnect
         self.client.on_message = DroneCommandProcessor.onMessage
         self.client.tls_set(ca_certs=ca,
@@ -158,11 +159,25 @@ class DroneCommandProcessor:
     def publishResponseMessage(self, message):
         responseMessage = json.dumps({
             SUCCESSFULLY_PROCESSED_COMMAND_KEY: message[COMMAND_KEY]})
-        result = self.clien.publish(
+        result = self.client.publish(
             topic = self.__class__.processed_commands_topic,
             payload = responseMessage)
         return result
 
+    def processCommands(self):
+        self.client.loop()
+        # Like calling to the loop method as synchronizing your mailbox.
+        # Any pending messages to be published in the outgoing bo will be sent and any incoming mesages will arrive to the inbox
+        # and events that we have previously analyzes will be fired.
+        # See README.md.
+
     # Debug
     def onLog(client, userdata, level, buf):
         print("LOG: {}".format(buf))
+
+if __name__ == "__main__":
+    drone = Drone("drone01")
+    droneCommandProcessor = DroneCommandProcessor("drone01", drone)
+    while True:
+        droneCommandProcessor.processCommands() # Process msgs and the commands every 1 second
+    time.sleep(1)
