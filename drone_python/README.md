@@ -99,8 +99,4 @@ This method creates an instance of the `Drone` class named `drone` with "`drone0
 
   The `while` loop calls the `droneCommandProcessor.processedcommands()` method and sleeps for one second. The `processedcommands` method calls the `loop` method for the MQTT client to ensure that communication with the MQTT server is carried out.
 
-### Test
-```
-self.on_log(self, self._userdata, level, buf)
-TypeError: unbound method onLog() must be called with DroneCommandProcessor instance as first argument (got Client instance instead)
-```
+### Test result
