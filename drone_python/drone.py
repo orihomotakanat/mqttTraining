@@ -82,7 +82,7 @@ class DroneCommandProcessor:
         self.client.on_connect = DroneCommandProcessor.onConnect
         self.client.on_message = DroneCommandProcessor.onMessage
         self.client.tls_set(ca_certs=ca,
-            certfile=clientCert
+            certfile=clientCert,
             keyfile=clientKey)
         self.client.connect(host=mqttServerHost,
             port=mqttPort,
