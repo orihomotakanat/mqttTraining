@@ -96,8 +96,8 @@ class DroneCommandProcessor:
 
     @staticmethod
     def onMessage(client, userdata, msg):
-        payloadString = msg.payload.decode('utf-8')
         if msg.topic == DroneCommandProcessor.commands_topic:
+            payloadString = msg.payload.decode('utf-8')
             print("I've received the following msg: {0}".format(payloadString))
         try:
             msgDictionary = json.load(payloadString)
