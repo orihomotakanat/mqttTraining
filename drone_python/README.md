@@ -76,3 +76,10 @@ After a connection has been successfully established with the MQTT server, the s
 * `onMessage`
 Whenever there is a new message received in the topic; `commands_topic` class attribute to which we have subscribed, the specified callback in the `self.client.onMessage` attribute will be executed (the `onMessage` static method).
 This static method receives the `mqtt.Client` instance that established the connection with the MQTT broker in the `client` argument and and `mqtt.MQTTMessage` instance in the `msg` argument. The `mqtt.MQTTMessage` class describes an incoming message. At first, the static method checks whether the `msg.topic` attribute, which indicates the topic in which the message has been received, matches thr value in the `commands_topic` class attribute. In this case, whenever the `onMessage` method is executed, the value in the `msg.topic` will always match the value in the `topic` class attributes. For subscription to more than one topic, we included the code whichis check the `topic` for the received message.
+
+  - `payloadString = ... -`:  
+  In case the contents of `payloadString` are not JSON, a `ValueError` exeption will be captured; the code will print a message indicating that the message doesn't include a valid command and no more code will be executed in the static method. In case the contents of `payloadString` are JSON, we will have a dictionary in the `msgDictionary` local variable.
+  - `active_instance`:  
+  The code uses the `active_instance` class attribute that has a reference to the active `DroneCommandProcessor` instance to call the necessary methods for either `drone`
+  - After the code; `is_command_processed`:  
+  Once the command has been successfully processed, the code sets the `is_command_processed` flag to `True`. Finally, the code checks the value of this falg, and if it is equal to `True`, the code cals the `publishResponseMessage` for the `DroneCommandProcessor` instance saved in the `active_instance` class attribute.

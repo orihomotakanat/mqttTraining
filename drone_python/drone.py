@@ -113,12 +113,6 @@ class DroneCommandProcessor:
                 elif command == CMD_LAND_IN_SAFE_PLACE:
                     drone.land_in_safe_place()
                     is_command_processed = True
-                elif command == CMD_MOVE_UP:elif command == CMD_LAND:
-                    drone.land()
-                    is_command_processed = True
-                elif command == CMD_LAND_IN_SAFE_PLACE:
-                    drone.land_in_safe_place()
-                    is_command_processed = True
                 elif command == CMD_MOVE_UP:
                     drone.move_up()
                     is_command_processed = True
