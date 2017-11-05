@@ -100,3 +100,77 @@ This method creates an instance of the `Drone` class named `drone` with "`drone0
   The `while` loop calls the `droneCommandProcessor.processedcommands()` method and sleeps for one second. The `processedcommands` method calls the `loop` method for the MQTT client to ensure that communication with the MQTT server is carried out.
 
 ### Test result
+Leave the command running.
+
+```
+ubuntu@ip-172-31-27-200:~/certs$ mosquitto_sub -V mqttv311 -p 8883 --cafile /etc/mosquitto/ca_certificates/ca.crt -t processedcommands/drone01 -d -h 127.0.0.1 --cert device001.crt --key device001.key
+Client mosqsub|16451-ip-172-31 sending CONNECT
+Client mosqsub|16451-ip-172-31 received CONNACK
+Client mosqsub|16451-ip-172-31 sending SUBSCRIBE (Mid: 1, Topic: processedcommands/drone01, QoS: 0)
+Client mosqsub|16451-ip-172-31 received SUBACK
+Subscribed (mid: 1): 0
+```
+
+#### Sending right command case
+1. Execute subscribed command.
+```
+ubuntu@ip-172-31-27-200:~/mqttTraining/drone_python$ python drone.py
+LOG: Sending CONNECT (u0, p0, wr0, wq0, wf0, c1, k60) client_id=
+LOG: Received CONNACK (0, 0)
+Connected to the MQTT server
+LOG: Sending SUBSCRIBE (d0) [('commands/drone01', 2)]
+LOG: Sending PUBLISH (d0, q0, r0, m2), 'commands/drone01', ... (32 bytes)
+LOG: Received SUBACK
+LOG: Received PUBLISH (d0, q0, r0, m0), 'commands/drone01', ...  (32 bytes)
+I've received the following msg: drone01 is listening to messages
+```
+
+2. Publish the message to the topic; `commands/drone01`.
+
+```
+ubuntu@ip-172-31-27-200:~/certs$ mosquitto_pub -V mqttv311 -p 8883 --cafile /etc/mosquitto/ca_certificates/ca.crt -t commands/drone01 -d -h 127.0.0.1 --cert device001.crt --key device001.key -m '{"COMMAND" : "LAND"}' -q 1
+Client mosqpub|16436-ip-172-31 sending CONNECT
+Client mosqpub|16436-ip-172-31 received CONNACK
+Client mosqpub|16436-ip-172-31 sending PUBLISH (d0, q1, r0, m1, 'commands/drone01', ... (20 bytes))
+Client mosqpub|16436-ip-172-31 received PUBACK (Mid: 1)
+Client mosqpub|16436-ip-172-31 sending DISCONNECT
+```
+
+3. `drone01` subscribes and processes the commands, and publish the result to the topic; `processedcommands/drone01`.
+
+```
+LOG: Received PUBLISH (d0, q1, r0, m5), 'commands/drone01', ...  (20 bytes)
+LOG: Sending PUBACK (Mid: 5)
+I've received the following msg: {"COMMAND" : "LAND"}
+drone01: Landing
+LOG: Sending PUBLISH (d0, q0, r0, m7), 'processedcommands/drone01', ... (42 bytes)
+```
+
+4. It displays all the messages received in the `processedcommands/drone01` topic.
+
+```
+Client mosqsub|16451-ip-172-31 received PUBLISH (d0, q0, r0, m0, 'processedcommands/drone01', ... (42 bytes))
+{"SUCCESSFULLY_PROCESSED_COMMAND": "LAND"}
+```
+
+#### Sending wrong command case
+1. Publish the *WRONG* message to the topic; `commands/drone01`
+```
+ubuntu@ip-172-31-27-200:~/certs$ mosquitto_pub -V mqttv311 -p 8883 --cafile /etc/mosquitto/ca_certificates/ca.crt -t commands/drone01 -d -h 127.0.0.1 --cert device001.crt --key device001.key -m 'Hello' -q 1
+Client mosqpub|16438-ip-172-31 sending CONNECT
+Client mosqpub|16438-ip-172-31 received CONNACK
+Client mosqpub|16438-ip-172-31 sending PUBLISH (d0, q1, r0, m1, 'commands/drone01', ... (5 bytes))
+Client mosqpub|16438-ip-172-31 received PUBACK (Mid: 1)
+Client mosqpub|16438-ip-172-31 sending DISCONNECT
+```
+
+2. Drone01 does not receive the command and execute `exception` block.
+
+```
+LOG: Received PUBLISH (d0, q1, r0, m6), 'commands/drone01', ...  (5 bytes)
+LOG: Sending PUBACK (Mid: 6)
+I've received the following msg: Hello
+No including a valid command
+```
+
+3. No messages received in the `processedcommands/drone01` topic.
