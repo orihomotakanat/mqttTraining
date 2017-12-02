@@ -1,4 +1,4 @@
-from commnd import *
+from command import *
 import paho.mqtt.client as mqtt
 import os.path
 import time
@@ -52,7 +52,7 @@ class LoopControl:
         print("LOG: {}".format(buf))
 
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     client = mqtt.Client(protocol=mqtt.MQTTv311)
     client.on_log = onLog
     client.on_connect = onConnect
