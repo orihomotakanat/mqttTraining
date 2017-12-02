@@ -22,7 +22,7 @@ processed_commands_topic = "processedcommands/{}".format(drone_name)
 class LoopControl:
     is_last_command_processed = False
 
-def onConnect(client, userdata, rc):
+def onConnect(client, userdata, flags, rc):
     print("Connect result: {}".format(mqtt.connack_string(rc)))
     client.subscribe(processed_commands_topic)
 
