@@ -64,7 +64,6 @@ if __name__ == "__main__":
         port=mqttPort,
         keepalive=mqttKeepAlive)
 
-
     # Send commands to drone
     publishCommand(client, CMD_TAKE_OFF)
     publishCommand(client, CMD_MOVE_UP)
