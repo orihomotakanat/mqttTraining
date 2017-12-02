@@ -174,3 +174,6 @@ No including a valid command
 ```
 
 3. No messages received in the `processedcommands/drone01` topic.
+
+## `iotBoardClient.py`
+### 1. `LoopControl` class
