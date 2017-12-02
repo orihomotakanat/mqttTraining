@@ -199,3 +199,115 @@ This function calls the publish method to publish the `command_message` JSON for
 The `while` loop calls the `client.loop` method to ensure that communication with the MQTT server is carried out, and then it sleeps for one second. After the last command is processed, the `LoopControl.is_last_command_processed` class variable is set to `False` and the while loop ends.
 
 ### Test result
+#### 1. Drone side
+Subscribe specific topic
+
+```
+ubuntu@ip-172-31-24-234:~/mqttTraining/drone_python$ python drone.py
+LOG: Sending CONNECT (u0, p0, wr0, wq0, wf0, c1, k60) client_id=
+LOG: Received CONNACK (0, 0)
+Connected to the MQTT server
+LOG: Sending SUBSCRIBE (d0) [('commands/drone01', 2)]
+LOG: Sending PUBLISH (d0, q0, r0, m2), 'commands/drone01', ... (32 bytes)
+LOG: Received SUBACK
+LOG: Received PUBLISH (d0, q0, r0, m0), 'commands/drone01', ...  (32 bytes)
+I've received the following msg: drone01 is listening to messages
+```
+
+#### 2. iotBoardClient side
+Publish commands & receive necessary packets
+
+```
+ubuntu@ip-172-31-24-234:~/mqttTraining/drone_python$ python iotBoardClient.py
+Log: Sending CONNECT (u0, p0, wr0, wq0, wf0, c1, k60) client_id=
+Log: Sending PUBLISH (d0, q2, r0, m1), 'commands/drone01', ... (23 bytes)
+Log: Sending PUBLISH (d0, q2, r0, m2), 'commands/drone01', ... (22 bytes)
+Log: Sending PUBLISH (d0, q2, r0, m3), 'commands/drone01', ... (24 bytes)
+Log: Sending PUBLISH (d0, q2, r0, m4), 'commands/drone01', ... (41 bytes)
+Log: Sending PUBLISH (d0, q2, r0, m5), 'commands/drone01', ... (42 bytes)
+Log: Sending PUBLISH (d0, q2, r0, m6), 'commands/drone01', ... (33 bytes)
+Log: Received CONNACK (0, 0)
+Connect result: Connection Accepted.
+Log: Sending SUBSCRIBE (d0) [('processedcommands/drone01', 0)]
+Log: Received PUBREC (Mid: 1)
+Log: Sending PUBREL (Mid: 1)
+Log: Received PUBREC (Mid: 2)
+Log: Sending PUBREL (Mid: 2)
+Log: Received PUBREC (Mid: 3)
+Log: Sending PUBREL (Mid: 3)
+Log: Received PUBREC (Mid: 4)
+Log: Sending PUBREL (Mid: 4)
+Log: Received PUBREC (Mid: 5)
+Log: Sending PUBREL (Mid: 5)
+Log: Received PUBREC (Mid: 6)
+Log: Sending PUBREL (Mid: 6)
+Log: Received SUBACK
+Subscribed with QoS: 0, Mid: 7
+Log: Received PUBCOMP (Mid: 1)
+Log: Received PUBCOMP (Mid: 2)
+Log: Received PUBCOMP (Mid: 3)
+Log: Received PUBCOMP (Mid: 4)
+Log: Received PUBCOMP (Mid: 5)
+Log: Received PUBLISH (d0, q0, r0, m0), 'processedcommands/drone01', ...  (46 bytes)
+{"SUCCESSFULLY_PROCESSED_COMMAND": "TAKE_OFF"}
+Log: Received PUBLISH (d0, q0, r0, m0), 'processedcommands/drone01', ...  (45 bytes)
+{"SUCCESSFULLY_PROCESSED_COMMAND": "MOVE_UP"}
+Log: Received PUBLISH (d0, q0, r0, m0), 'processedcommands/drone01', ...  (47 bytes)
+{"SUCCESSFULLY_PROCESSED_COMMAND": "MOVE_BACK"}
+Log: Received PUBLISH (d0, q0, r0, m0), 'processedcommands/drone01', ...  (49 bytes)
+{"SUCCESSFULLY_PROCESSED_COMMAND": "ROTATE_LEFT"}
+Log: Received PUBLISH (d0, q0, r0, m0), 'processedcommands/drone01', ...  (50 bytes)
+{"SUCCESSFULLY_PROCESSED_COMMAND": "ROTATE_RIGHT"}
+Log: Received PUBCOMP (Mid: 6)
+Log: Received PUBLISH (d0, q0, r0, m0), 'processedcommands/drone01', ...  (56 bytes)
+{"SUCCESSFULLY_PROCESSED_COMMAND": "LAND_IN_SAFE_PLACE"}
+Log: Sending DISCONNECT
+```
+
+#### 3. Drone side
+Drone sends necessary packets and operate commands
+
+```
+LOG: Received PUBLISH (d0, q2, r0, m1), 'commands/drone01', ...  (23 bytes)
+LOG: Sending PUBREC (Mid: 1)
+LOG: Received PUBLISH (d0, q2, r0, m2), 'commands/drone01', ...  (22 bytes)
+LOG: Sending PUBREC (Mid: 2)
+LOG: Received PUBLISH (d0, q2, r0, m3), 'commands/drone01', ...  (24 bytes)
+LOG: Sending PUBREC (Mid: 3)
+LOG: Received PUBREL (Mid: 1)
+I've received the following msg: {"COMMAND": "TAKE_OFF"}
+drone01: Taking off
+LOG: Sending PUBLISH (d0, q0, r0, m3), 'processedcommands/drone01', ... (46 bytes)
+LOG: Sending PUBCOMP (Mid: 1)
+LOG: Received PUBLISH (d0, q2, r0, m4), 'commands/drone01', ...  (41 bytes)
+LOG: Sending PUBREC (Mid: 4)
+LOG: Received PUBLISH (d0, q2, r0, m5), 'commands/drone01', ...  (42 bytes)
+LOG: Sending PUBREC (Mid: 5)
+LOG: Received PUBREL (Mid: 2)
+I've received the following msg: {"COMMAND": "MOVE_UP"}
+drone01: Moving up
+LOG: Sending PUBLISH (d0, q0, r0, m4), 'processedcommands/drone01', ... (45 bytes)
+LOG: Sending PUBCOMP (Mid: 2)
+LOG: Received PUBREL (Mid: 3)
+I've received the following msg: {"COMMAND": "MOVE_BACK"}
+drone01: Moving back
+LOG: Sending PUBLISH (d0, q0, r0, m5), 'processedcommands/drone01', ... (47 bytes)
+LOG: Sending PUBCOMP (Mid: 3)
+LOG: Received PUBREL (Mid: 4)
+I've received the following msg: {"DEGREES": 90, "COMMAND": "ROTATE_LEFT"}
+drone01: Rotating left 90 degrees
+LOG: Sending PUBLISH (d0, q0, r0, m6), 'processedcommands/drone01', ... (49 bytes)
+LOG: Sending PUBCOMP (Mid: 4)
+LOG: Received PUBREL (Mid: 5)
+I've received the following msg: {"DEGREES": 45, "COMMAND": "ROTATE_RIGHT"}
+drone01: Rotating right 45 degrees
+LOG: Sending PUBLISH (d0, q0, r0, m7), 'processedcommands/drone01', ... (50 bytes)
+LOG: Sending PUBCOMP (Mid: 5)
+LOG: Received PUBLISH (d0, q2, r0, m6), 'commands/drone01', ...  (33 bytes)
+LOG: Sending PUBREC (Mid: 6)
+LOG: Received PUBREL (Mid: 6)
+I've received the following msg: {"COMMAND": "LAND_IN_SAFE_PLACE"}
+drone01: Landing in a safe place
+LOG: Sending PUBLISH (d0, q0, r0, m8), 'processedcommands/drone01', ... (56 bytes)
+LOG: Sending PUBCOMP (Mid: 6)
+```
