@@ -43,7 +43,7 @@ class LoopControl:
                 COMMAND_KEY: command_name, key: value})
         else:
             command_meesage = json.dumps({
-                COMMAND_KEYL command_name})
+                COMMAND_KEY: command_name})
         result = client.publish(topic = commands_topic, payload = command_meesage, qos = 2)
         return result
 
@@ -65,4 +65,17 @@ if __name__ = "__main__":
         port=mqttPort,
         keepalive=mqttKeepAlive)
 
+    # Send commands to drone
     publishCommand(client, CMD_TAKE_OFF)
+    publishCommand(client, CMD_MOVE_UP)
+    publishCommand(client, CMD_MOVE_BACK)
+    publishCommand(client, CMD_ROTATE_LEFT, KEY_DEGREES, 90)
+    publishCommand(client, CMD_ROTATE_RIGHT, 45)
+    publishCommand(client, CMD_LAND_IN_SAFE_PLACE)
+
+    while LoopControl.is_last_command_processed == False:
+        client.loop()
+        time.sleep(1)
+
+    client.disconnect()
+    client.loop()
