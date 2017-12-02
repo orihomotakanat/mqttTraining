@@ -69,7 +69,7 @@ if __name__ == "__main__":
     publishCommand(client, CMD_MOVE_UP)
     publishCommand(client, CMD_MOVE_BACK)
     publishCommand(client, CMD_ROTATE_LEFT, KEY_DEGREES, 90)
-    publishCommand(client, CMD_ROTATE_RIGHT, 45)
+    publishCommand(client, CMD_ROTATE_RIGHT, KEY_DEGREES, 45)
     publishCommand(client, CMD_LAND_IN_SAFE_PLACE)
 
     while LoopControl.is_last_command_processed == False:
