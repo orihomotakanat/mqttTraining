@@ -181,10 +181,10 @@ No including a valid command
 The class attribute is initialized to `False`. This will be used as a flag to control the network loop.
 
 * `onConnect` function
-This is the callback that will be executed once a successful connection has been established with the MQTT server. This code calls the `subscribe` method for the MQTT client received in the `client` to subscribe to the `processed_commands_topic` with a QoS = 0.
+This function is the callback that will be executed once a successful connection has been established with the MQTT server. This code calls the `subscribe` method for the MQTT client received in the `client` to subscribe to the `processed_commands_topic` with a QoS = 0.
 
 * `onMessage` function
-
+This will be executed every time a new message arrives to the topic to which we have subscribed. If the message in the payload includes the `CMD_LAND_IN_SAFE_PLACE` constant, we assume that the last command was successfully executed and the code sets the `LoopControl.is_last_command_processed` to `True`
 
 * `onSubscribe` function
 

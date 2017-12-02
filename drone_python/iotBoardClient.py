@@ -50,3 +50,19 @@ class LoopControl:
     # Debug
     def onLog(client, userdata, level, buf):
         print("LOG: {}".format(buf))
+
+
+if __name__ = "__main__":
+    client = mqtt.Client(protocol=mqtt.MQTTv311)
+    client.on_log = onLog
+    client.on_connect = onConnect
+    client.on_subscribe = onSubscribe
+    client.on_message = onMessage
+    client.tls_set(ca_certs=ca,
+        certfile=clientCert,
+        keyfile=clientKey)
+    client.connect(host=mqttServerHost,
+        port=mqttPort,
+        keepalive=mqttKeepAlive)
+
+    publishCommand(client, CMD_TAKE_OFF)
