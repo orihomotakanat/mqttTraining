@@ -1,4 +1,4 @@
-from commnd import *
+from command import *
 import paho.mqtt.client as mqtt
 import os.path
 import time
@@ -51,7 +51,7 @@ class LoopControl:
         result = client.publish(topic = commands_topic, payload = command_meesage, qos = 2)
         return result
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     client = mqtt.Client(protocol=mqtt.MQTTv311)
     client.on_log = onLog
     client.on_connect = onConnect
