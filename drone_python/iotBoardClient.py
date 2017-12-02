@@ -53,7 +53,6 @@ def onLog(client, userdata, level, buf):
 
 if __name__ == "__main__":
     client = mqtt.Client(protocol=mqtt.MQTTv311)
-    client.on_log = onLog
     client.on_connect = onConnect
     client.on_subscribe = onSubscribe
     client.on_message = onMessage
@@ -63,6 +62,7 @@ if __name__ == "__main__":
     client.connect(host=mqttServerHost,
         port=mqttPort,
         keepalive=mqttKeepAlive)
+    client.on_log = onLog
 
     # Send commands to drone
     publishCommand(client, CMD_TAKE_OFF)
