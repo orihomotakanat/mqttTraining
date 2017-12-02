@@ -177,3 +177,15 @@ No including a valid command
 
 ## `iotBoardClient.py`
 ### 1. `LoopControl` class
+* `is_last_command_processed`
+The class attribute is initialized to `False`. This will be used as a flag to control the network loop.
+
+* `onConnect` function
+This is the callback that will be executed once a successful connection has been established with the MQTT server. This code calls the `subscribe` method for the MQTT client received in the `client` to subscribe to the `processed_commands_topic` with a QoS = 0.
+
+* `onMessage` function
+
+
+* `onSubscribe` function
+
+* `publishCommand` function
