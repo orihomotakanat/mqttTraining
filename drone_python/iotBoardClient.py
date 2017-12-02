@@ -37,10 +37,6 @@ class LoopControl:
     def onSubscribe(client, userdata, mid, granted_qos):
         print("Subscribed with QoS: {}, Mid: {}".format(granted_qos[0], mid))
 
-    # Debug
-    def onLog(client, userdata, level, buf):
-        print("LOG: {}".format(buf))
-
     def publishCommand(client, command_name, key="", value=""):
         if key:
             command_meesage = json.dumps({
@@ -50,6 +46,10 @@ class LoopControl:
                 COMMAND_KEY: command_name})
         result = client.publish(topic = commands_topic, payload = command_meesage, qos = 2)
         return result
+
+    # Debug
+    def onLog(client, userdata, level, buf):
+        print("Log: {}".format(buf))
 
 if __name__ == "__main__":
     client = mqtt.Client(protocol=mqtt.MQTTv311)
