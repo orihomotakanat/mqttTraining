@@ -265,7 +265,7 @@ Log: Sending DISCONNECT
 ```
 
 #### 3. Drone side
-Drone sends necessary packets and operate commands
+Drone sends necessary packets and operate commands 
 
 ```
 LOG: Received PUBLISH (d0, q2, r0, m1), 'commands/drone01', ...  (23 bytes)
