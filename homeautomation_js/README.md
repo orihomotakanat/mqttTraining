@@ -93,3 +93,5 @@ $ npm install -g npm
 $ npm -v
 5.6.0
 ```
+
+## `index.html`
