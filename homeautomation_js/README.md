@@ -102,3 +102,11 @@ $ npm -v
 
 ### Body section
 This section declares a `div` element whose `id` is `status` and will change its tet when a connection is successfully established with the MQTT server.
+
+Each `div` that represents and LED declares an `input` element with the `jscolor` class that will display the JSColor pure js color picker. The followingline shows the code that runs for the first LED: `APP.homeAutomation.Manager.updateLed(1, this.jscolor)`
+
+The line calls the `APP.homeAutomation.Manager.updateLed` function with the LED identifiew as an arugument(`1`) and a string with the selected color fomr the color picker (`this.jscolor`).
+
+In addition, the `div` that represents an LED declares an SVG circle whise `id` is `ledStatusXXX`, followed by the LED identifier. Whenever IoT boards successfully updates the color for the LED and publishes a status messagem the web page will receive this message and update the fill color for the circle with the color the user has chosen.
+
+The script element at the end of the code uses pure js to calls the `APP.homeAutomation.Manager.connect` function once the page DOM is ready for the js code to execute. 
