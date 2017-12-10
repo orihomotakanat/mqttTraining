@@ -95,3 +95,4 @@ $ npm -v
 ```
 
 ## `index.html`
+http://xxx.xxx.xxx.xxx/mqttTraining/homeautomation_js/automationView.html
