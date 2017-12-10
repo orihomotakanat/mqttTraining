@@ -94,5 +94,11 @@ $ npm -v
 5.6.0
 ```
 
-## `index.html`
-http://xxx.xxx.xxx.xxx/mqttTraining/homeautomation_js/automationView.html
+## `automationView.html`
+### Loading scripts
+* `mqttws31.js`: This is the Paho js client (source: https://www.eclipse.org/paho/clients/js/).
+* `jscolor.js`: This is the jscolor file (source: https://github.com/alanswx/WebPixelFrame).
+* `homeAutomation.js`: This script file declares the `APP.homeAutomation.Manager` object.
+
+### Body section
+This section declares a `div` element whose `id` is `status` and will change its tet when a connection is successfully established with the MQTT server.
