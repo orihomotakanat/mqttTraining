@@ -87,3 +87,9 @@ v9.2.0
 ```
 
 Update npm
+
+```
+$ npm install -g npm
+$ npm -v
+5.6.0
+```
