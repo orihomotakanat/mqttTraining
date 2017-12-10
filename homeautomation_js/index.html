@@ -1,0 +1,53 @@
+<html>
+
+  <head>
+    <script src="paho.javaescript-1.0.2/mqttws31.js"></script>
+    <script src="jscolor-2.0.4/jscolor.js"></script>
+    <script src="homeAutomation.js"></script>
+  </head>
+
+  <body>
+    <div id="status">Not connected with MQTT server</div>
+    <div id="LED-1">
+      <span>
+        Select color for LED-1.
+      </span>
+      <input class="jscolor" onchange="APP.homeAutomation.Manager.updateLed (1, this.jscolor)" value="FFFFFF">
+      <svg height="100" width="100">
+          <circle id="ledStatusUpper" cx="50" cy="50" r="40" stroke="black" stroke-width="4" fill="FFFFFF" />
+      </svg>
+      <div id="ledMessageUpper">
+      </div>
+    </div>
+
+    <div id="LED-2">
+      <span>
+        Select color for LED-2.
+      </span>
+      <input class="jscolor" onchange="APP.homeAutomation.Manager.updateLed (2, this.jscolor)" value="FFFFFF">
+      <svg height="100" width="100">
+          <circle id="ledStatusCenter" cx="50" cy="50" r="40" stroke="black" stroke-width="4" fill="FFFFFF" />
+      </svg>
+      <div id="ledMessageCenter">
+      </div>
+    </div>
+
+    <div id="LED-3">
+      <span>
+        Select color for LED-3.
+      </span>
+      <input class="jscolor" onchange="APP.homeAutomation.Manager.updateLed (3, this.jscolor)" value="FFFFFF">
+      <svg height="100" width="100">
+          <circle id="ledStatusLower" cx="50" cy="50" r="40" stroke="black" stroke-width="4" fill="FFFFFF" />
+      </svg>
+      <div id="ledMessageLower">
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  document.addEventListner("DOMContentLoaded", function(event) {
+    APP.homeAutomation.Manager.connect();
+  });
+</script>
