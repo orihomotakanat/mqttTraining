@@ -35,4 +35,5 @@ Default locale: en_US, platform encoding: UTF-8
 OS name: "linux", version: "4.4.0-1043-aws", arch: "amd64", family: "unix"
 ```
 
-## `sampleCode.java`
+## Build Maven project
+We use the 30 days trial of IntelliJ IDEA by JetBrains: https://www.jetbrains.com/idea/download/#section=mac
