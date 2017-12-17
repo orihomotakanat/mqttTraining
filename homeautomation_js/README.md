@@ -193,6 +193,19 @@ protocol websockets
 ```
 
 4. Restart mosquitto by execute `$ sudo service mosquitto start`
+5. Check the listener
+
+```
+$ netstat -an | grep 9001
+tcp        0      0 0.0.0.0:9001            0.0.0.0:*               LISTEN  
+```
+
+## Test controling LEDs via MQTT connection over Websockets
+```
+$ node controlLeds.js
+Connected to the MQTT-server
+
+```
 
 
 ## Securing MQTT over WebSockets with TLS
