@@ -188,7 +188,7 @@ Dec 17 08:12:11 ip-ip-xxx-xxx-xxx-xxx systemd[1]: Started LSB: mosquitto MQTT v3
 
 ```
 # WebSockets
-listner 9001 0.0.0.0
+listener 9001 0.0.0.0
 protocol websockets
 ```
 
