@@ -135,4 +135,4 @@ Then, the code retrieve the LED Location from the message's topic and saves it i
 (ex.) If the value for `message.destinationName` is `home/results/leds/Upper`, the code replaces `home/results/leds/` with an empty string and the resulting string. `1`, is the LED Location.
 
 * `onMessageDelivered`
-This function receives a `Paho.MQTT.Message` instance in the `message` argument. In this case, the function has an empty body because of preventing from running a code when a message has been successfully delivered
+This function receives a `Paho.MQTT.Message` instance in the `message` argument. In this case, the function has an empty body because of preventing from running a code when a message has been successfully delivered.
