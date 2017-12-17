@@ -1,6 +1,6 @@
 var APP = APP || {};
-APP.homeAutomation = APP.homeAutomation || {};
-APP.homeAutomation.Manager = {
+APP.HomeAutomation = APP.HomeAutomation || {};
+APP.HomeAutomation.Manager = {
   ledCommandBaseTopic: "home/leds/", //BaseTopic means "home/leds/..."
   ledResultBaseTopic: "home/results/leds/",
 
@@ -43,11 +43,11 @@ APP.homeAutomation.Manager = {
   //When message arriving
   onMessageArrived: function(message) {
     console.log("Message arrived for topic: " + message.destinationName + ", with the following payload: " + message.payloadString);
-    if(!message.destinationName.startsWith(APP.homeAutomation.Manager.ledResultBaseTopic)){
+    if(!message.destinationName.startsWith(APP.HomeAutomation.Manager.ledResultBaseTopic)){
       return;
     }
 
-    var ledLocation = message.destinationName.replace (APP.homeAutomation.Manager.ledResultBaseTopic, "");
+    var ledLocation = message.destinationName.replace (APP.HomeAutomation.Manager.ledResultBaseTopic, "");
     var payload = JSON.parse(message.payloadString); //payload: re-definition
 
     if (ledLocation && payload.color) {
