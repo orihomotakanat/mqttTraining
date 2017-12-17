@@ -69,13 +69,13 @@ APP.HomeAutomation.Manager = {
     //Update the status text
     document.getElementById("status").textContent = "Connected with the MQTT-server";
     var client = invocationContext.invocationContext.client;
-    for (var = i; i < 4; i++) {
+    for (var i = 1; i < 4; i++) {
       client.subscribe("home/results/leds/" + i); //Subsribing to /home/results/leds/1, 2 or 3
     }
   },
 
   connect: function() {
-    this.client = new.Paho.MQTT.Client(this.host, this.port, this.clientId);
+    this.client = new Paho.MQTT.Client(this.host, this.port, this.clientId);
     this.client.onConnectionLost = this.onConnectionLost;
     this.client.onMessageArrived = this.onMessageArrived;
     this.client.onMessageDelivered = this.onMessageDelivered;
