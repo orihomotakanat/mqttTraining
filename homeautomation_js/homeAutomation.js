@@ -5,7 +5,7 @@ APP.HomeAutomation.Manager = {
   ledResultBaseTopic: "home/results/leds/",
 
   //MQTT server setting
-  host: "ws://localhost:9001/",
+  host: "127.0.0.1",
   port: 9001, //Websocket
   clientId: "homeWeb-" + Math.random().toString(16).substr(2, 8),
 
