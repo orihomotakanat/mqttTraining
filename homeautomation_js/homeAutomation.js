@@ -26,7 +26,7 @@ APP.HomeAutomation.Manager = {
     };
 
     payloadString = JSON.stringify(payload);
-    message = new.Paho.MQTT.Message(payloadString);
+    message = new Paho.MQTT.Message(payloadString);
     message.destinationName = this.ledCommandBaseTopic + ledId;
     message.qos = 0; //The defalut value is 0.
 
