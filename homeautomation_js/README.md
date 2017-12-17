@@ -29,7 +29,7 @@ $ npm -v
 3.5.2
 ```
 
-Install node via `nodenv` and write following contents to `~/.bash_profile`
+Install node via `nodenv` and write following contents to `~/.bash_profile` (or `~/.bashrc`)
 
 ```
 $ git clone git://github.com/nodenv/nodenv.git ~/.nodenv
@@ -109,4 +109,21 @@ The line calls the `APP.homeAutomation.Manager.updateLed` function with the LED 
 
 In addition, the `div` that represents an LED declares an SVG circle whise `id` is `ledStatusXXX`, followed by the LED identifier. Whenever IoT boards successfully updates the color for the LED and publishes a status messagem the web page will receive this message and update the fill color for the circle with the color the user has chosen.
 
-The script element at the end of the code uses pure js to calls the `APP.homeAutomation.Manager.connect` function once the page DOM is ready for the js code to execute. 
+The script element at the end of the code uses pure js to calls the `APP.homeAutomation.Manager.connect` function once the page DOM is ready for the js code to execute.
+
+
+## `homeAutomation.js`
+This code provides an `APP.HomeAutomation.Manager` object with many strings, objects, and functions that we will use to make it easy to establish a connection with MQTT over WS. The function works with the Paho js client.
+
+
+### `APP.HomeAutomation.Manager` object
+* `mqttConnectOptions`
+This object specifies values for the different options that we will use to establish a connection with the MQTT server. To work with MQTTv3.1.1, it is needed to use a cleas session and work with an unsecured connection.
+
+#### `updateLed`
+
+
+#### `onConnectionLost`
+
+
+#### `onMessageArrived`
