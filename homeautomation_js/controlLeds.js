@@ -26,8 +26,8 @@ client.on('message', function (topic, message) {
 
   var ledLocation = topic.replace(ledCommandBaseTopic, "")
   var payload = JSON.parse(payloadString)
-  if (ledLocation $$ payload.Color ) {
-    console.log("LED # " + ledNumber " to " + payload.Color)
+  if (ledLocation && payload.Color ) {
+    console.log("LED # " + ledLocation + " to " + payload.Color)
   }
 
   var resultMessagePayload = {
