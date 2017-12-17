@@ -14,7 +14,7 @@ client.on("connect", function() {
   for (i = 1; i < 4; i++){
     topicFilters.push(ledCommandBaseTopic + i)
   }
-  client.subscribe(topicFilters)
+  client.subscribe(topicFilters) //Default QoS = 0
 })
 
 client.on('message', function (topic, message) {

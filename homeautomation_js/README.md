@@ -150,6 +150,18 @@ After a conncetion has been successfully established with the MQTT server, the s
 In this case, we don't specify any subscribe options.
 
 ## `ControllLeds.js`
+### `mqtt.connect`
+This function is called after the client successfully establishes a connection with the MQTT server (After the MQTT over WS client establishes a connection with the MQTT server, `client.connected` evaluate to `true`)
+
+### `client.on('message', ...)`
+The code specifies the callback function assigned to the `message` event. This function will be called whenever the client recieves a message from the MQTT server. The function receives the following two arguments:
+* `topic`: Specifies the topic for the received message
+* `message`: The buffer for the recieved message's payload
+
+Then, the code checks whether `topic` starts with `ledCommandBaseTopic` to make sure that the message's destination topic and the payload string included in the `topic` argument and the `payloadString` variable.
+
+Finally, the code calls the `client.pubish` function with `ledResultBaseTopic` concatenated with `ledLocation` and `resultMessagePayloadString` as the topic and payload arguments. This way, the code requests the MQTT over WS client to publish a message to the appropriate topic with the results of the execution of the command.
+
 
 
 
