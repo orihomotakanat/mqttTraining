@@ -162,7 +162,37 @@ Then, the code checks whether `topic` starts with `ledCommandBaseTopic` to make 
 
 Finally, the code calls the `client.pubish` function with `ledResultBaseTopic` concatenated with `ledLocation` and `resultMessagePayloadString` as the topic and payload arguments. This way, the code requests the MQTT over WS client to publish a message to the appropriate topic with the results of the execution of the command.
 
+## Enabling WebSockets for a Mosquitto server
+1. Check mosquitto status
+```
+$ sudo service mosquitto status
+● mosquitto.service - LSB: mosquitto MQTT v3.1 message broker
+   Loaded: loaded (/etc/init.d/mosquitto; bad; vendor preset: enabled)
+   Active: active (running) since Sun 2017-12-17 08:12:11 UTC; 7h ago
+     Docs: man:systemd-sysv-generator(8)
+  Process: 1215 ExecStart=/etc/init.d/mosquitto start (code=exited, status=0/SUCCESS)
+    Tasks: 1
+   Memory: 1.2M
+      CPU: 3.748s
+   CGroup: /system.slice/mosquitto.service
+           └─1256 /usr/sbin/mosquitto -c /etc/mosquitto/mosquitto.conf
 
+Dec 17 08:12:11 ip-xxx-xxx-xxx-xxx systemd[1]: Starting LSB: mosquitto MQTT v3.1 message broker...
+Dec 17 08:12:11 ip-ip-xxx-xxx-xxx-xxx mosquitto[1215]:  * Starting network daemon: mosquitto
+Dec 17 08:12:11 ip-1ip-xxx-xxx-xxx-xxx mosquitto[1215]:    ...done.
+Dec 17 08:12:11 ip-ip-xxx-xxx-xxx-xxx systemd[1]: Started LSB: mosquitto MQTT v3.1 message broker.
+```
+
+2. Stop the mosquitto server by execute `$ sudo service mosquitto stop`
+3. Add following contents to `mosquitto.conf`
+
+```
+# WebSockets
+listner 9001 0.0.0.0
+protocol websockets
+```
+
+4. Restart mosquitto by execute `$ sudo service mosquitto start`
 
 
 ## Securing MQTT over WebSockets with TLS
