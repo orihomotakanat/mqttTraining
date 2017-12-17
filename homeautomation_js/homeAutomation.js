@@ -75,7 +75,7 @@ APP.homeAutomation.Manager = {
   },
 
   connect: function() {
-    this.client = new.Paho.MQTT.Client(this.host, this.port,this.clientId);
+    this.client = new.Paho.MQTT.Client(this.host, this.port, this.clientId);
     this.client.onConnectionLost = this.onConnectionLost;
     this.client.onMessageArrived = this.onMessageArrived;
     this.client.onMessageDelivered = this.onMessageDelivered;

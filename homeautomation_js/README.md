@@ -138,9 +138,19 @@ Then, the code retrieve the LED Location from the message's topic and saves it i
 This function receives a `Paho.MQTT.Message` instance in the `message` argument. In this case, the function has an empty body because of preventing from running a code when a message has been successfully delivered.
 
 
+#### `connect`
+This function creates a new instance of `Paho.MQTT.Client`. The code saves this new instance in the `this.client` attribute. This attribute represents an MQTT over the WebSockets client, and we will use it to communicate with an MQTT server.
+
+After a conncetion has been successfully established with the MQTT server, the specified callback inthe `this.mqttConnectOptions.onSuccess` attribute will be executed; the `onConnectSuccess` function. This function receives an `invocationContext` object as an argument. The code can retrieve the instance of `Paho.MQTT.Client`, which established the conneection with the MQTT server in the `invocationContext.invocationContext.client` attribute.
+
+1. The `onSuccess` function updates the status text to indicate that the client is connected with the MQTT server.
+2. The code saves `Paho.MQTT.Client`, which establised the connection in the `client` variable.
+3. Finally, a `for` loop calls the `client.subscribe` method three times to subscribe to the three topics: `home/results/leds/1, 2, 3`
+
+In this case, we don't specify any subscribe options.
 
 ## `ControllLeds.js`
 
 
 
-## Securing MQTT over WebSocekets with TLS
+## Securing MQTT over WebSockets with TLS
