@@ -57,7 +57,7 @@ APP.HomeAutomation.Manager = {
       var statusLedCircle = document.getElementById("ledStatus" + ledLocation);
 
       statusLedCircle.style.fill = "#" + payload.Color;
-    },
+    }
   },
 
   //When message delivered
