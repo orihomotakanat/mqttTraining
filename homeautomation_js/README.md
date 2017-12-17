@@ -204,8 +204,6 @@ tcp        0      0 0.0.0.0:9001            0.0.0.0:*               LISTEN
 ```
 $ node controlLeds.js
 Connected to the MQTT-server
-
 ```
 
-
-## Securing MQTT over WebSockets with TLS
+Using Google chrome developer console, you can debug codes!!
