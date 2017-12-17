@@ -13,7 +13,7 @@ APP.HomeAutomation.Manager = {
   mqttConnectOptions: {
     timeout: 3,
     mqttVersion: 4, //v3.1.1
-    mqttVersionExplicit: true,
+    //mqttVersionExplicit: true,
     useSSL: false,
     cleanSession: true
   },
