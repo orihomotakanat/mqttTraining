@@ -58,14 +58,34 @@ APP.homeAutomation.Manager = {
 
       statusLedCircle.style.fill = "#" + payload.Color;
     },
-
-    //When message delivered
-    onMessageDelivered: function(message){
-    },
-
-
-
   },
 
+  //When message delivered
+  onMessageDelivered: function(message){
+  },
 
-}
+  //Successfully reveiving `CONNACK` packet
+  onConnectSuccess: function(invocationContext) {
+    //Update the status text
+    document.getElementById("status").textContent = "Connected with the MQTT-server";
+    var client = invocationContext.invocationContext.client;
+    for (var = i; i < 4; i++) {
+      client.subscribe("home/results/leds/" + i); //Subsribing to /home/results/leds/1, 2 or 3
+    }
+  },
+
+  connect: function() {
+    this.client = new.Paho.MQTT.Client(this.host, this.port,this.clientId);
+    this.client.onConnectionLost = this.onConnectionLost;
+    this.client.onMessageArrived = this.onMessageArrived;
+    this.client.onMessageDelivered = this.onMessageDelivered;
+    this.mqttConnectOptions.invocationContext = {
+      client: this.client
+    };
+    this.mqttConnectOptions.onSuccess = this.onConnectSuccess;
+    this.mqttConnectOptions.onFailure = function (message) {
+      console.log("Connection has failed: " + message);
+    }
+    this.client.connect(this.mqttConnectOptions);
+  }
+};
