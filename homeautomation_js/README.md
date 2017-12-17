@@ -121,7 +121,7 @@ This code provides an `APP.HomeAutomation.Manager` object with many strings, obj
 This object specifies values for the different options that we will use to establish a connection with the MQTT server. To work with MQTTv3.1.1, it is needed to use a cleas session and work with an unsecured connection.
 
 #### `updateLed`
-This function receives the LED ID and the RGB color in the `ledID` and `jscolor` arguments. After creating a new `Paho.MQTT.Message` instance named `message` with `payloadString`, the code sets the value of the `message.distinationName` attribute to `thisledCommandBaseTopic`, concatenated with the value received in the `ledId` argument. This `destinationName` attribute for a `Paho.MQTT.Message` instance specifies the topic to which a message has to be published.
+This function receives the LED Location and the RGB color in the `ledID` and `jscolor` arguments. After creating a new `Paho.MQTT.Message` instance named `message` with `payloadString`, the code sets the value of the `message.distinationName` attribute to `thisledCommandBaseTopic`, concatenated with the value received in the `ledId` argument. This `destinationName` attribute for a `Paho.MQTT.Message` instance specifies the topic to which a message has to be published.
 
 The `connect` function creates a `Paho.MQTT.Client` instance and saves it in `this.client`. Finally, the `updateLed` function calls the `this.client.send` function with the message as an argument to publish the MQTT message. The function runs with an asynchronous execution, and agter the message is successfully delivered, the `Paho.MQTT.onMessageDelivered` attribute in the `connect` function.
 
@@ -129,4 +129,10 @@ The `connect` function creates a `Paho.MQTT.Client` instance and saves it in `th
 This function receives a `responseObject` object as an argument, and prints a message to the console log with the value of the `responseObject.errorMessage` attribute when this attribute is not equal to 0.
 
 #### `onMessageArrived`
-This function receives a `Paho.MQTT.Message` instance in the `message` arugument. After printing a message to the console log about the detination topic (`message.destinationName`) and the payload string (`message.payloadString`) attributes, the code checks whether `message.destinationName` starts with `APP.HomeAutomation.Manager.ledResultBaseTopic` to make sure that the message's destination topic is the one defined for the results og the commands releated to LEDs.
+This function receives a `Paho.MQTT.Message` instance in the `message` arugument. After printing a message to the console log about the detination topic (`message.destinationName`) and the payload string (`message.payloadString`) attributes, the code checks whether `message.destinationName` starts with `APP.HomeAutomation.Manager.ledResultBaseTopic` to make sure that the message's destination topic is the one defined for the results of the commands related to LEDs.
+
+Then, the code retrieve the LED Location from the message's topic and saves it in the `ledLocation` variable. The code removes `APP.HomeAutomation.Manager.ledResultBaseTopic` from `message.destinationName` to retrieve the LED Location.
+(ex.) If the value for `message.destinationName` is `home/results/leds/Upper`, the code replaces `home/results/leds/` with an empty string and the resulting string. `1`, is the LED Location.
+
+* `onMessageDelivered`
+This function receives a `Paho.MQTT.Message` instance in the `message` argument. In this case, the function has an empty body because of preventing from running a code when a message has been successfully delivered
