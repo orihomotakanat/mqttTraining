@@ -7,7 +7,7 @@ APP.HomeAutomation.Manager = {
   //MQTT server setting
   host: "127.0.0.1",
   port: 9001, //Websocket
-  clientId: "homeWeb-" + clientId: "homeWeb-" + Math.random().toString(16).substr(2, 8),
+  clientId: "homeWeb-" + Math.random().toString(16).substr(2, 8),
 
 
   mqttConnectOptions: {
