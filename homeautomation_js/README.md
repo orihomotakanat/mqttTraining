@@ -129,3 +129,4 @@ The `connect` function creates a `Paho.MQTT.Client` instance and saves it in `th
 This function receives a `responseObject` object as an argument, and prints a message to the console log with the value of the `responseObject.errorMessage` attribute when this attribute is not equal to 0.
 
 #### `onMessageArrived`
+This function receives a `Paho.MQTT.Message` instance in the `message` arugument. After printing a message to the console log about the detination topic (`message.destinationName`) and the payload string (`message.payloadString`) attributes, the code checks whether `message.destinationName` starts with `APP.HomeAutomation.Manager.ledResultBaseTopic` to make sure that the message's destination topic is the one defined for the results og the commands releated to LEDs.
