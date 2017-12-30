@@ -27,12 +27,12 @@ export PATH="$HOME/apache-maven-3.5.2/bin:$PATH"
 5. Confirm maven Installation
 ```
 $ mvn -v
-Apache Maven 3.5.2 (138edd61fd100ec658bfa2d307c43b76940a5d7d; 2017-10-18T07:58:13Z)
-Maven home: /home/ubuntu/apache-maven-3.5.2
-Java version: 1.8.0_151, vendor: Oracle Corporation
-Java home: /usr/lib/jvm/java-8-openjdk-amd64/jre
-Default locale: en_US, platform encoding: UTF-8
-OS name: "linux", version: "4.4.0-1043-aws", arch: "amd64", family: "unix"
+Apache Maven 3.5.2 (138edd61fd100ec658bfa2d307c43b76940a5d7d; 2017-10-18T16:58:13+09:00)
+Maven home: /Users/User/apache-maven-3.5.2
+Java version: 9.0.1, vendor: Oracle Corporation
+Java home: /Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home
+Default locale: ja_JP, platform encoding: UTF-8
+OS name: "mac os x", version: "10.12.6", arch: "x86_64", family: "mac"
 ```
 
 ## Build Maven project
