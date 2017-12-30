@@ -37,3 +37,32 @@ OS name: "mac os x", version: "10.12.6", arch: "x86_64", family: "mac"
 
 ## Build Maven project
 We use the 30 days trial of IntelliJ IDEA by JetBrains: https://www.jetbrains.com/idea/download/#section=mac
+
+1. Create Maven project
+
+```
+$ mvn archetype:generate \
+-DinteractiveMode=false \
+-DgroupId=tst.sample \
+-DartifactId=sensors
+
+...
+
+[INFO] ----------------------------------------------------------------------------
+[INFO] Using following parameters for creating project from Old (1.x) Archetype: maven-archetype-quickstart:1.0
+[INFO] ----------------------------------------------------------------------------
+[INFO] Parameter: basedir, Value: /home/ubuntu/mqttTraining/sensor_java/classes
+[INFO] Parameter: package, Value: tst.sample
+[INFO] Parameter: groupId, Value: tst.sample
+[INFO] Parameter: artifactId, Value: sensors
+[INFO] Parameter: packageName, Value: tst.sample
+[INFO] Parameter: version, Value: 1.0-SNAPSHOT
+[INFO] project created from Old (1.x) Archetype in dir: /home/ubuntu/mqttTraining/sensor_java/classes/sensors
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 41.329 s
+[INFO] Finished at: 2017-12-30T06:35:51Z
+[INFO] Final Memory: 16M/237M
+[INFO] ------------------------------------------------------------------------
+```
