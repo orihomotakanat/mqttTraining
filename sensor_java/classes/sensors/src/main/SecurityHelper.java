@@ -40,7 +40,7 @@ public class SecurityHelper {
     }
 
     private static X509Certificate create509CertificateFromFile (final String certificateFileName) throws IOException, CertificateException {
-        // Reads an X509 cert from the specified certificate file name
+        // Loads an X509 cert from the specified certificate file name
         final File file = new java.io.File(certificateFileName);
         if (!file.isFile()) {
             throw new IOException (
@@ -56,6 +56,6 @@ public class SecurityHelper {
     }
 
     private static PrivateKey createPrivateKeyFromPemFile(final String keyFileName) throws IOException, InvalidKeySpecException, NoSuchAlgorithmException {
-        // Reads a privte-key from the specified key file name
+        // Loads a privte-key from the specified key file name
     }
 } //public class SecurityHelper end
