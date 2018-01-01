@@ -77,11 +77,11 @@ public class Main {
                 @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
                     if (!topic.equals(topicLedA)) {
-                        System.out.printIn("Invalid topic");
+                        System.out.println("Invalid topic");
                         return;
                     }
                     String messageText = new String(message.getPayload(), "UTF-8");
-                    System.out.printIn(String.format(
+                    System.out.println(String.format(
                             "Topic: %s. Payload: %s", topic, messageText
                     ));
                 }
@@ -91,12 +91,12 @@ public class Main {
             IMqttToken mqttConnectToken = mqttAsyncClient.connect(mqttConnectOptions, null, new IMqttActionLister(){
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    System.out.printIn(String.forma("Successfully connected"));
+                    System.out.println(String.forma("Successfully connected"));
                     try {
                         IMqttToken subscribeToken = mqttAsyncClient.subscribe(topicLedA, 0, null, new IMqttActionListner() {
                            @Override
                             public void onSuccess(IMqttToken asyncActionToken) {
-                               System.out.printIn(String.format("Subscribed to the topic: %s, with QoS: %d", topicLedA, asyncActionToken.getGrantedQos()[0]));
+                               System.out.println(String.format("Subscribed to the topic: %s, with QoS: %d", topicLedA, asyncActionToken.getGrantedQos()[0]));
                            }
                         }); // IMqttToken subscribeToken end
 
