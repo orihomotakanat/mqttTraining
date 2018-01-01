@@ -40,3 +40,10 @@ This class uses the asynchronous API of the Paho Java Client and the `SecurityHe
 * `IMqttActionLister` interface
 
 ## Subsription test
+1. Build project
+Please refer to https://maven.apache.org/run-maven/
+
+```
+$ cd sensor_java/classes/sensor
+$ mvn verify
+```

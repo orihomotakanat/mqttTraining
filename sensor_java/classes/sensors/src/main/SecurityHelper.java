@@ -94,7 +94,7 @@ public class SecurityHelper {
 
     //..
     private static TrustManagerFactory createTrustManagerFactory (final String caCertificateFileName)
-        throws CertificateExeption, NouchAlgorithmException, IOException, KeyStoreException {
+        throws CertificateException, NoSuchAlgorithmException, IOException, KeyStoreException {
 
         final X509Certificate caCertificate = (X509Certificate) createX509CertificateFromFile(caCertificateFileName); // Loac CA-cert
         final keyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
