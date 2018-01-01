@@ -66,3 +66,8 @@ $ mvn archetype:generate \
 [INFO] Final Memory: 16M/237M
 [INFO] ------------------------------------------------------------------------
 ```
+
+## About two codes
+### 1. The basic subcription: `classes/`
+
+### 2. Processing commands that interact with sensors: `InteractiveProcessingCommands`
