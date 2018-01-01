@@ -88,12 +88,12 @@ public class Main {
             });
 
             //In this case, we do not use the token for secure connection. Following code is a main connection part.
-            IMqttToken mqttConnectToken = mqttAsyncClient.connect(mqttConnectOptions, null, new IMqttActionListner(){
+            IMqttToken mqttConnectToken = mqttAsyncClient.connect(mqttConnectOptions, null, new IMqttActionListener(){
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     System.out.println(String.forma("Successfully connected"));
                     try {
-                        IMqttToken subscribeToken = mqttAsyncClient.subscribe(topicLedA, 0, null, new IMqttActionListner() {
+                        IMqttToken subscribeToken = mqttAsyncClient.subscribe(topicLedA, 0, null, new IMqttActionListener() {
                            @Override
                             public void onSuccess(IMqttToken asyncActionToken) {
                                System.out.println(String.format("Subscribed to the topic: %s, with QoS: %d", topicLedA, asyncActionToken.getGrantedQos()[0]));
