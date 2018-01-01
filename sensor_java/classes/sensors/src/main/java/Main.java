@@ -77,7 +77,7 @@ public class Main {
                 @override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
                     if (!topic.equals(topicLedA)) {
-                        System.out.printIn("Invalid topic")
+                        System.out.printIn("Invalid topic");
                         return;
                     }
                     String messageText = new String(message.getPayload(), "UTF-8");

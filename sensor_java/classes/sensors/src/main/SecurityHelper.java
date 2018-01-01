@@ -45,9 +45,7 @@ public class SecurityHelper {
         // Loads an X509 cert from the specified certificate file name
         final File file = new java.io.File(certificateFileName);
         if (!file.isFile()) {
-            throw new IOException (
-                    String.format("The cert file %s does not exist.", certificateFileName);
-            )
+            throw new IOException (String.format("The cert file %s does not exist.", certificateFileName));
         }
         final CertificateFactory certificateFactoryX509 = CertificateFactory.getInstance("X509");
         final InputStream inputStream = new FileInputStream(file);
