@@ -27,7 +27,7 @@ public class Main {
             final String mqttServerHost = "127.0.0.1";
             final int mqttServerPort = 8883;
             final String mqttServerURI = String.format(
-                    "ssl://%s:%d", // If you connect without security, use "ftp://%s:%d"
+                    "ftp://%s:%d", // If you connect without security, use "ftp://%s:%d"
                     mqttServerHost,
                     mqttServerPort);
             final String mqttClientId = MqttAsyncClient.generateClientId(); // Generates automatially
