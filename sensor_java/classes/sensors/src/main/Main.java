@@ -98,6 +98,11 @@ public class Main {
                             public void onSuccess(IMqttToken asyncActionToken) {
                                System.out.println(String.format("Subscribed to the topic: %s, with QoS: %d", topicLedA, asyncActionToken.getGrantedQos()[0]));
                            }
+
+                           @Override
+                            public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                               exception.printStackTrace();
+                           }
                         }); // IMqttToken subscribeToken end
 
                     } catch (MqttException e) {
