@@ -24,10 +24,10 @@ public class Main {
             MemoryPersistence memoryPersistence = new MemoryPersistence();
 
             // MQTT server setting
-            final String mqttServerHost = "127.0.0.1";
+            final String mqttServerHost = "localhost";
             final int mqttServerPort = 8883;
             final String mqttServerURI = String.format(
-                    "ftp://%s:%d", // If you connect without security, use "ftp://%s:%d"
+                    "ssl://%s:%d", // If you connect without security, use "ftp://%s:%d"
                     mqttServerHost,
                     mqttServerPort);
             final String mqttClientId = MqttAsyncClient.generateClientId(); // Generates automatially
