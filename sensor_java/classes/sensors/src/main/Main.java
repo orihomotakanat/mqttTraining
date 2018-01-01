@@ -91,7 +91,7 @@ public class Main {
             IMqttToken mqttConnectToken = mqttAsyncClient.connect(mqttConnectOptions, null, new IMqttActionListener(){
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    System.out.println(String.forma("Successfully connected"));
+                    System.out.println(String.format("Successfully connected"));
                     try {
                         IMqttToken subscribeToken = mqttAsyncClient.subscribe(topicLedA, 0, null, new IMqttActionListener() {
                            @Override
@@ -105,7 +105,7 @@ public class Main {
                     }
                 }
 
-                public void onFailure(IMqtt asyncActionToken, Throwable exception) {
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     exception.printStackTrace();
                 }
             }); // IMqttToken mqttConnectToken end
