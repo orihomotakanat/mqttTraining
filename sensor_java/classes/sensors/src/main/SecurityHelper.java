@@ -41,7 +41,7 @@ public class SecurityHelper {
     }
 
     //Receiving cert files and Calling other methos
-    private static X509Certificate create509CertificateFromFile (final String certificateFileName) throws IOException, CertificateException {
+    private static X509Certificate createX509CertificateFromFile (final String certificateFileName) throws IOException, CertificateException {
         // Loads an X509 cert from the specified certificate file name
         final File file = new java.io.File(certificateFileName);
         if (!file.isFile()) {
