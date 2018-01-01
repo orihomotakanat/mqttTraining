@@ -95,5 +95,16 @@ $ mvn verify
 [INFO] Finished at: 2018-01-02T03:11:05+09:00
 [INFO] Final Memory: 18M/62M
 [INFO] ------------------------------------------------------------------------
+```
 
+2. Check `.jar` file
+```
+$ cd /target
+$ ls -a
+.  ..  classes  generated-sources  lib  maven-archiver  maven-status  sensors-1.0-SNAPSHOT.jar
+```
+
+3. Execution of `.jar` file
+```
+$ java -jar sensors-1.0-SNAPSHOT.jar 
 ```

@@ -46,7 +46,7 @@ public class Main {
 
             final String caCertificateFileName = String.join(java.io.File.separator, certificatesPath, "ca.crt");
             final String clientCertificateFileName = String.join(java.io.File.separator, certificatesPath, "device001.crt");
-            final String clientKeyFileName = String.join(java.io.File.separator, certificatesPath, "device001.ckey");
+            final String clientKeyFileName = String.join(java.io.File.separator, certificatesPath, "device001.key");
 
             // Create socketFactory, if you connect without security, you do not have to call the this part.
             SSLSocketFactory socketFactory;
