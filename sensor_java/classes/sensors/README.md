@@ -26,3 +26,7 @@ The method loads all these files, generate the appropriate instances from them, 
 
 
 And, provides public static `createSocketFactory` method.
+
+## `Main.java`
+### `Main` class
+This class uses the asynchronous API of the Paho Java Client and the `SecurityHelper` class to stablish an enrypted connection with an MQTT server. This class subscribes to the specific topic filter & shows all messages received.

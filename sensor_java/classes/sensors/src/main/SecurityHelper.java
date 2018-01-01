@@ -109,18 +109,24 @@ public class SecurityHelper {
         return trustManagerFactory;
     }
 
-    //...
+    // Create a TLS socket factory with the given three cert files
     public static SSLSocketFactory createSocketFactory (
             final String caCertificateFileName,
             final String clientCertificateFileName,
             final String clientKeyFileName) throws Exception {
         final String clientKeyPassword = "";
         try {
-            SecurityHelper.addProvider (new BouncyCastleProvider)
+            SecurityHelper.addProvider (new BouncyCastleProvider());
+            final KeyManager[] keyManagers = createKeyManagerFactory(clientCertificateFileName, clientKeyFileName, clientKeyPassword).getKeyManagers();
+            final TrustManager[] trustManagers = createTrustManagerFactory(caCertificateFileName).getTrustManagers();
 
+            final SSLContext context = SSLContext.getInstance(TLS_VERSION);
+            context.init(keyManagers, trustManagers, new SecureRandom());
+
+            return context.getSocketFactory();
         } // try end
         catch (Exception e) {
-
+            throw new Exception("Cannot create the TLS socket factory.", e);
         } // catch end
     }
 
