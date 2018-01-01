@@ -1,4 +1,4 @@
-# Sensor directory
+# `Sensor/` directory
 Components
 ```
 sensors

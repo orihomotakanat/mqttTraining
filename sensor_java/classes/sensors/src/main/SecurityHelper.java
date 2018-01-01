@@ -64,11 +64,12 @@ public class SecurityHelper {
         final PemObject pemObject = pemReader.readPemObject();
         final byte[] pemContent = pemObject.getContent();
         pemReader.close();
+
         final PKCS8EncodedKeySpec encodedKeySpec = new PKCS8EncodedKeySpec(pemContent);
         final KeyFactory keyFactory = getKeyFactoryInstance();
         final PrivateKey privateKey = keyFactory.generatePrivate(encodedKeySpec);
-        return privateKey;
 
+        return privateKey;
     }
 
     //...
@@ -76,13 +77,36 @@ public class SecurityHelper {
             final String clientCertificateFileName,
             final String clientKeyFileNeme,
             final String clientKeyPassword) throws InvalidKeySpecException, NoSuchAlgorithmException, KeyStoreException, IOException, CertificateException, UnrecoverableKeyException {
-        // Add contents
+        // Create keystore by loading and creating client certificate, and creating private client key
+        final X509Certificate clientCertificate = createX509CertificateFromFile(clientCertificateFileName);
+        final PrivateKey privateKey = createPrivateKeyFromPemFile(clientKeyFileNeme);
+        final KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+        keyStore.load(null, null);
+        keyStore.setCertificateEntry("certificate", clientCertificate);
+        keyStore.setKeyEntry("privateKey", privateKey, clientKeyPassword.toCharArray(), new Certificate[] {clientCertificate});
+
+        // Create keyManagerFactory
+        final KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+        keyManagerFactory.init(
+                keyStore,
+                clientKeyPassword.toCharArray());
+
+        return keyManagerFactory;
     }
 
     //..
     private static TrustManagerFactory createTrustManagerFactory (final String caCertificateFileName)
         throws CertificateExeption, NouchAlgorithmException, IOException, KeyStoreException {
-        // Add contents
+
+        final X509Certificate caCertificate = (X509Certificate) createX509CertificateFromFile(caCertificateFileName); // Loac CA-cert
+        final keyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+        keyStore.load(null, null);
+        keyStore.setCertificateEntry("caCertificate", caCerticate);
+
+        final TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+        trustManagerFactory.init(keyStore);
+
+        return trustManagerFactory;
     }
 
     //...
@@ -92,11 +116,12 @@ public class SecurityHelper {
             final String clientKeyFileName) throws Exception {
         final String clientKeyPassword = "";
         try {
+            SecurityHelper.addProvider (new BouncyCastleProvider)
 
         } // try end
         catch (Exception e) {
 
         } // catch end
     }
-    
+
 } //public class SecurityHelper end
