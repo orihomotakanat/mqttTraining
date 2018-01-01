@@ -8,6 +8,7 @@ sensors
         └── main
             ├── SecurityHelper.java
             └── java
+                └── Main.java
 ```
 
 ## `SecurityHelper.java`
