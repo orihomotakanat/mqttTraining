@@ -42,7 +42,7 @@ public class Main {
 
 
             // Client certs
-            final String certificatesPath = "/home/ubuntu/certs/";
+            final String certificatesPath = "/home/ubuntu/certs";
 
             final String caCertificateFileName = String.join(java.io.File.separator, certificatesPath, "ca.crt");
             final String clientCertificateFileName = String.join(java.io.File.separator, certificatesPath, "device001.crt");

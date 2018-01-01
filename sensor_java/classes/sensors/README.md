@@ -106,5 +106,5 @@ $ ls -a
 
 3. Execution of `.jar` file
 ```
-$ java -jar sensors-1.0-SNAPSHOT.jar 
+$ java -jar sensors-1.0-SNAPSHOT.jar
 ```
