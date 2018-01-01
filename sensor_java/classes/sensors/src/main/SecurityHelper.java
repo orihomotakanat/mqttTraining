@@ -99,7 +99,7 @@ public class SecurityHelper {
         final X509Certificate caCertificate = (X509Certificate) createX509CertificateFromFile(caCertificateFileName); // Loac CA-cert
         final KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
         keyStore.load(null, null);
-        keyStore.setCertificateEntry("caCertificate", caCerticate);
+        keyStore.setCertificateEntry("caCertificate", caCertificate);
 
         final TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
         trustManagerFactory.init(keyStore);
@@ -114,7 +114,7 @@ public class SecurityHelper {
             final String clientKeyFileName) throws Exception {
         final String clientKeyPassword = "";
         try {
-            SecurityHelper.addProvider (new BouncyCastleProvider());
+            Security.addProvider(new BouncyCastleProvider());
             final KeyManager[] keyManagers = createKeyManagerFactory(clientCertificateFileName, clientKeyFileName, clientKeyPassword).getKeyManagers();
             final TrustManager[] trustManagers = createTrustManagerFactory(caCertificateFileName).getTrustManagers();
 
