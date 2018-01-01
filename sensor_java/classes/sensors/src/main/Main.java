@@ -64,17 +64,17 @@ public class Main {
 
 
             mqttAsyncClient.setCallback(new MqttCallback() {
-                @override
+                @Override
                 public void connectionLost(Throwable cause){
                     cause.printStackTrace();
                 }
 
-                @override
+                @Override
                 public void deliveryComplete(IMqttDeliveryToken token){
                     //
                 }
 
-                @override
+                @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
                     if (!topic.equals(topicLedA)) {
                         System.out.printIn("Invalid topic");
@@ -89,12 +89,12 @@ public class Main {
 
             //In this case, we do not use the token for secure connection. Following code is a main connection part.
             IMqttToken mqttConnectToken = mqttAsyncClient.connect(mqttConnectOptions, null, new IMqttActionLister(){
-                @override
+                @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     System.out.printIn(String.forma("Successfully connected"));
                     try {
                         IMqttToken subscribeToken = mqttAsyncClient.subscribe(topicLedA, 0, null, new IMqttActionListner() {
-                           @override
+                           @Override
                             public void onSuccess(IMqttToken asyncActionToken) {
                                System.out.printIn(String.format("Subscribed to the topic: %s, with QoS: %d", topicLedA, asyncActionToken.getGrantedQos()[0]));
                            }
