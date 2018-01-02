@@ -1,4 +1,4 @@
-//This class provide the some private static methods
+package main;
 
 import java.io.File;
 import java.io.FileInputStream;

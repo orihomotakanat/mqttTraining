@@ -1,4 +1,4 @@
-//package main;
+package main;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -10,7 +10,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class SensorManager implements MqttCallback {
+public class SensorsManager implements MqttCallback {
 
     //Commands
     private static final String SENSOR_HUMIDITY = "humidity";
@@ -27,15 +27,15 @@ public class SensorManager implements MqttCallback {
     private volatile boolean isLightValueSensorTurnedOn = false;
     private volatile boolean isHumiditySensorTurnedOn = false;
 
-    public SensorManager(
-            final MqttAsyncCient asyncCient,
-            final String boardCommandsTopicm
+    public SensorsManager(
+            final MqttAsyncClient asyncClient,
+            final String boardCommandsTopic,
             final String boardDataBaseTopic,
             final String encoding) {
         this.boardCommandsTopic = boardCommandsTopic;
         this.boardDataBaseTopic = boardDataBaseTopic;
         this.encoding = encoding;
-        this.asyncClient = asyncCient;
+        this.asyncClient = asyncClient;
         this.humidityTopic = this.boardDataBaseTopic.concat(SENSOR_HUMIDITY);
 
         final String lightValueTopic = boardDataBaseTopic.concat(SENSOR_LIGHT_VALUE);
@@ -52,9 +52,13 @@ public class SensorManager implements MqttCallback {
             final int qos,
             final boolean retained) {
         byte[] bytesForPayload;
-        try{
+        try {
             bytesForPayload = textForMessage.getBytes(this.encoding);
-            return asyncClient.publish(topic, bytesForPayload, qos, retained, null, actionListener);
+            return asyncClient.publish(topic, bytesForPayload, qos,
+                    retained, null, actionListener);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
         } catch (MqttException e) {
             e.printStackTrace();
             return null;
@@ -144,4 +148,4 @@ public class SensorManager implements MqttCallback {
         }
     } //public void loop() end
 
-} // public class SensorManager implements MqttCallback end
+} // public class SensorsManager implements MqttCallback end
