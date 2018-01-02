@@ -135,6 +135,12 @@ public class SensorManager implements MqttCallback {
         if (isLightValueSensorTurnedOn) {
             final int visibleLight = ThreadLocalRandom.current().nextInt(201, 301);
             publishMessage(visibleLightTopic, String.format("%d lm", visibleLight), null, 0, false);
+
+            final int infraredLight = ThreadLocalRandom.current().nextInt(251,281);
+            publishMessage(infraredLightTopic, String.format("%d lm", infraredLight), null, 0, false);
+
+            final int ultraVioletIndex = ThreadLocalRandom.current().nextInt(0, 16);
+            publishMessage(ultraVioletIndexTopic, String.format("%d UV Index", ultraVioletIndex), null, 0, false);
         }
     } //public void loop() end
 
