@@ -64,3 +64,6 @@ InteractiveProcessing-0.0.1-SNAPSHOT.jar maven-archiver
 ```
 
 3. Excecution of `.jar` file
+```
+$ java -jar InteractiveProcessing-0.0.1-SNAPSHOT.jar
+```
