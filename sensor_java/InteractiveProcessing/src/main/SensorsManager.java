@@ -1,4 +1,4 @@
-package main;
+//package main;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -41,7 +41,7 @@ public class SensorsManager implements MqttCallback {
         final String lightValueTopic = boardDataBaseTopic.concat(SENSOR_LIGHT_VALUE);
 
         this.visibleLightTopic = String.join(TOPIC_SEPARATOR, lightValueTopic, "visibleLight");
-        this.infraredLightTopic = String.join(TOPIC_SEPARATOR, lightValueTopic, "ir")
+        this.infraredLightTopic = String.join(TOPIC_SEPARATOR, lightValueTopic, "ir");
         this.ultraVioletIndexTopic = String.join(TOPIC_SEPARATOR, lightValueTopic, "uv");
     }
 
